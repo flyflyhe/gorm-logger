@@ -77,7 +77,7 @@ func main() {
 
 		var user2 *models.User
 		err = repository.GetQuery(sessionDb).Transaction(func(tx *query.Query) error {
-			user2, err = repUser.FindByName(tx, "hemoumou")
+			user2, err = repUser.FindSubQuery(tx, "hejinxue")
 
 			return err
 		})

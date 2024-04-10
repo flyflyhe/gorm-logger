@@ -38,3 +38,13 @@ func (u *User) FindByName(tx *query.Query, name string) (*models.User, error) {
 
 	return q.WithContext(u.ctx).Where(q.Username.Eq(name)).First()
 }
+
+func (u *User) FindSubQuery(tx *query.Query, name string) (*models.User, error) {
+	q := u.q.User
+	if tx != nil {
+		q = tx.User
+	}
+
+	subQuery := q.Select(q.ID).WithContext(u.ctx).Where(q.Username.Eq(name))
+	return q.WithContext(u.ctx).Where(q.Columns(q.ID).In(subQuery)).First()
+}
