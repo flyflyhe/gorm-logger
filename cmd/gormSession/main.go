@@ -56,9 +56,9 @@ func main() {
 
 		//sessionDb := db.GetDb().Session(&gorm.Session{Context: sessionCtx, Logger: dbLogger})
 		//sessionDb := db.GetDb().Session(&gorm.Session{Context: sessionCtx})
-		sessionDb := db.GetDb()
+		//sessionDb := db.GetDb()
 
-		repUser := repository.NewUser(sessionCtx, sessionDb)
+		repUser := repository.NewUser(sessionCtx)
 
 		err := repUser.Create(nil, &models.User{
 			Username: "hejinxue",
@@ -76,7 +76,7 @@ func main() {
 		}
 
 		var user2 *models.User
-		err = repository.GetQuery(sessionDb).Transaction(func(tx *query.Query) error {
+		err = repository.GetQuery().Transaction(func(tx *query.Query) error {
 			user2, err = repUser.FindSubQuery(tx, "hejinxue")
 
 			return err

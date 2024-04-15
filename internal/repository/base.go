@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"gorm.io/gorm"
+	"gormSession/internal/db"
 	"gormSession/internal/query"
 )
 
-func GetQuery(db *gorm.DB) *query.Query {
-	return query.Use(db)
+func GetQuery() *query.Query {
+	return query.Use(db.GetDb())
 }

@@ -13,11 +13,11 @@ type User struct {
 	ctx context.Context
 }
 
-func NewUser(ctx context.Context, db *gorm.DB) *User {
+func NewUser(ctx context.Context) *User {
 	return &User{
 		ctx: ctx,
-		db:  db,
-		q:   query.Use(db),
+		//db:  db,
+		q: GetQuery(),
 	}
 }
 
